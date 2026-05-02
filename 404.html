@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Page not found — Scholarly Bright Minds. Try the homepage or one of the member sites.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0d1411" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f3e8" media="(prefers-color-scheme: light)">
+<title>Page Not Found — Scholarly Bright Minds</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #0d1411; --text: #ebe4d0; --text-soft: #b5ad98; --muted: #6e685c;
+    --accent: #6fab98; --accent-d: #93c8b4; --border: #253029;
+    --display: 'Fraunces', Georgia, serif; --body: 'Manrope', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: light) {
+    :root { --bg: #f7f3e8; --text: #25251f; --text-soft: #46443d; --muted: #8a8378;
+            --accent: #2d5547; --accent-d: #1f4134; --border: #e6dfcd; }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: var(--body);
+       min-height: 100vh; display: grid; place-items: center;
+       text-align: center; padding: 2rem; }
+.code { font-family: var(--display); font-size: clamp(6rem, 18vw, 12rem);
+        font-weight: 300; line-height: 1; color: var(--accent);
+        letter-spacing: -0.04em; margin-bottom: 0.5rem; }
+.title { font-family: var(--display); font-size: clamp(1.4rem, 4vw, 2rem);
+         font-weight: 400; margin-bottom: 0.8rem; }
+.msg { color: var(--text-soft); max-width: 480px; margin: 0 auto 2rem;
+       line-height: 1.6; }
+.actions { display: flex; gap: 0.7rem; justify-content: center;
+           flex-wrap: wrap; }
+.actions a { padding: 0.6rem 1.2rem; border: 1px solid var(--border);
+             border-radius: 12px; color: var(--text); text-decoration: none;
+             font-size: 0.92rem; transition: all .25s ease; }
+.actions a:hover { border-color: var(--accent); color: var(--accent);
+                   transform: translateY(-1px); }
+.actions a.primary { background: var(--accent); color: var(--bg);
+                     border-color: var(--accent); }
+.actions a.primary:hover { background: var(--accent-d); color: var(--bg); }
+</style>
+</head>
+<body>
+<div>
+    <p class="code">404</p>
+    <h1 class="title">This page doesn't exist (yet).</h1>
+    <p class="msg">The link is broken or the page never existed. Head back to the hub or visit one of the member sites.</p>
+    <div class="actions">
+        <a href="/" class="primary">Hub home</a>
+        <a href="/abdallahabouhajal/">Abdallah</a>
+        <a href="/molhamsakkal/">Molham</a>
+        <a href="/Rahafalzeer/">Rahaf</a>
+        <a href="/ahmadalmeslamani/">Ahmad</a>
+    </div>
+</div>
+</body>
+</html>
