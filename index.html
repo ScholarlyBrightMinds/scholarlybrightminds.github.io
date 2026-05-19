@@ -241,6 +241,47 @@ nav .gh:hover { color: var(--accent); }
     border: 1px solid var(--accent);
     border-color: rgba(111,171,152,0.3);
 }
+
+/* Org-wide live stats — populated by aggregate_metrics.py from each
+   member's data/serpapi/metrics.json on every weekly build. Hidden by
+   default until the script bakes in the numbers (we ship empty markers
+   on first deploy so the strip doesn't render as a blank pill). */
+.org-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    margin: 0 auto 1.5rem;
+    max-width: 720px;
+}
+.org-stat {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.32rem;
+    padding: 0.45rem 0.95rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.87rem;
+    color: var(--text-soft);
+    font-family: var(--body);
+    transition: border-color .25s var(--ease), transform .25s var(--ease);
+}
+.org-stat:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+.org-stat strong {
+    color: var(--accent);
+    font-weight: 600;
+    font-family: var(--display);
+    font-size: 1.05rem;
+}
+@media (max-width: 540px) {
+    .org-stats { gap: 0.4rem 0.5rem; }
+    .org-stat { font-size: 0.78rem; padding: 0.35rem 0.7rem; }
+    .org-stat strong { font-size: 0.92rem; }
+}
 .hero .meta::before {
     content: '';
     width: 7px;
@@ -355,6 +396,26 @@ section.section {
     margin-bottom: 0.7rem;
     line-height: 1.5;
 }
+
+/* Per-member metric pill — baked in by aggregate_metrics.py. Sits between
+   the specialty line and the visit CTA. Empty markers on a fresh deploy
+   render nothing thanks to the absence of any child elements. */
+.member-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.85rem;
+    font-size: 0.82rem;
+    color: var(--text-soft);
+}
+.member-stats .ms { white-space: nowrap; }
+.member-stats .ms strong {
+    color: var(--text);
+    font-weight: 600;
+}
+.member-stats .ms-dot { color: var(--muted); }
+.member-card:hover .member-stats .ms strong { color: var(--accent-d); }
 .member-card .visit {
     display: inline-flex;
     align-items: center;
@@ -394,6 +455,44 @@ section.section {
     color: var(--text-soft);
     font-size: 0.88rem;
     line-height: 1.55;
+}
+
+/* Latest across the hub — combined recent feed baked from each member's
+   serpapi.json. One row per researcher, sorted newest first. */
+.latest-section { margin-top: 1rem; }
+.latest-list {
+    list-style: none;
+    display: grid;
+    gap: 0.4rem;
+    padding: 0;
+}
+.latest-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.95rem 1.1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color .25s var(--ease), transform .25s var(--ease);
+}
+.latest-row:hover { border-color: var(--accent); transform: translateY(-1px); }
+.latest-title {
+    font-family: var(--display);
+    font-size: 1.02rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.35;
+}
+.latest-title:hover { color: var(--accent-d); }
+.latest-meta {
+    font-size: 0.86rem;
+    color: var(--text-soft);
+    line-height: 1.45;
+}
+.latest-author {
+    color: var(--accent);
+    font-weight: 500;
 }
 
 /* Join */
@@ -485,6 +584,7 @@ footer a:hover { color: var(--accent); }
         <p class="star">✦ ✦ ✦</p>
         <h1>A space for <em>researchers</em>.</h1>
         <p class="tagline">A hub for early-career researchers who want to showcase their academic profile online — clean, fast, automatically synced from Google Scholar.</p>
+        <!-- ORG-STATS-START --><div class="org-stats" data-aggregated="true"><span class="org-stat"><strong>4</strong> researchers</span><span class="org-stat"><strong>175</strong> publications</span><span class="org-stat"><strong>2,064</strong> citations</span><span class="org-stat"><strong>h-index 24</strong> (top)</span></div><!-- ORG-STATS-END -->
         <span class="meta">Currently · 4 active members</span>
     </section>
 
@@ -500,6 +600,7 @@ footer a:hover { color: var(--accent); }
                 <img class="photo" src="https://raw.githubusercontent.com/ScholarlyBrightMinds/abdallahabouhajal/main/images/profile.png" alt="Abdallah Abou Hajal" loading="lazy">
                 <div class="name">Abdallah Abou Hajal</div>
                 <p class="specialty">AI for Drug Discovery &amp; Cheminformatics</p>
+                <!-- MEMBER-STATS-abdallahabouhajal-START --><div class="member-stats"><span class="ms"><strong>14</strong> pubs</span><span class="ms-dot">·</span><span class="ms"><strong>110</strong> cites</span><span class="ms-dot">·</span><span class="ms">h-index <strong>7</strong></span></div><!-- MEMBER-STATS-abdallahabouhajal-END -->
                 <span class="visit">Visit site</span>
             </a>
 
@@ -507,6 +608,7 @@ footer a:hover { color: var(--accent); }
                 <img class="photo" src="https://raw.githubusercontent.com/ScholarlyBrightMinds/molhamsakkal/main/images/profile.png" alt="Molham Sakkal" loading="lazy">
                 <div class="name">Molham Sakkal</div>
                 <p class="specialty">Cancer Cell Biology &amp; Drug Delivery</p>
+                <!-- MEMBER-STATS-molhamsakkal-START --><div class="member-stats"><span class="ms"><strong>15</strong> pubs</span><span class="ms-dot">·</span><span class="ms"><strong>112</strong> cites</span><span class="ms-dot">·</span><span class="ms">h-index <strong>6</strong></span></div><!-- MEMBER-STATS-molhamsakkal-END -->
                 <span class="visit">Visit site</span>
             </a>
 
@@ -514,6 +616,7 @@ footer a:hover { color: var(--accent); }
                 <img class="photo" src="https://raw.githubusercontent.com/ScholarlyBrightMinds/Rahafalzeer/main/images/profile.png" alt="Rahaf Al Zeer" loading="lazy">
                 <div class="name">Rahaf Al Zeer</div>
                 <p class="specialty">Pharmacist &amp; Graduate Teaching Assistant</p>
+                <!-- MEMBER-STATS-Rahafalzeer-START --><div class="member-stats"><span class="ms"><strong>4</strong> pubs</span><span class="ms-dot">·</span><span class="ms"><strong>47</strong> cites</span><span class="ms-dot">·</span><span class="ms">h-index <strong>2</strong></span></div><!-- MEMBER-STATS-Rahafalzeer-END -->
                 <span class="visit">Visit site</span>
             </a>
 
@@ -521,6 +624,7 @@ footer a:hover { color: var(--accent); }
                 <img class="photo" src="https://raw.githubusercontent.com/ScholarlyBrightMinds/ahmadalmeslamani/main/images/profile.png" alt="Ahmad Z. Al Meslamani" loading="lazy">
                 <div class="name">Ahmad Z. Al Meslamani</div>
                 <p class="specialty">Drug Safety &amp; Pharmacotherapy</p>
+                <!-- MEMBER-STATS-ahmadalmeslamani-START --><div class="member-stats"><span class="ms"><strong>142</strong> pubs</span><span class="ms-dot">·</span><span class="ms"><strong>1,795</strong> cites</span><span class="ms-dot">·</span><span class="ms">h-index <strong>24</strong></span></div><!-- MEMBER-STATS-ahmadalmeslamani-END -->
                 <span class="visit">Visit site</span>
             </a>
         </div>
@@ -570,6 +674,11 @@ footer a:hover { color: var(--accent); }
             <a class="btn" href="mailto:abdallah.abouhajal@gmail.com?subject=Joining%20Scholarly%20Bright%20Minds">Get in touch</a>
         </div>
     </section>
+
+    <!-- LATEST-START --><section class="section latest-section" data-aggregated="true"><p class="kicker">Latest work</p><h2 class="section-title">Recent across <em>the hub</em>.</h2><p class="section-lede">One newest publication per member, refreshed every Monday.</p><ul class="latest-list"><li class="latest-row"><a class="latest-title" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=usUecnoAAAAJ&cstart=100&citation_for_view=usUecnoAAAAJ:kRWSkSYxWN8C" target="_blank" rel="noopener">Understanding Gaps in Pharmacist–Patient Role Perceptions: Implications for Collaborative Care</a><span class="latest-meta"><a class="latest-author" href="https://scholarlybrightminds.github.io/ahmadalmeslamani/">Ahmad Z. Al Meslamani</a> &middot; Journal of Multidisciplinary Healthcare, 605078, 2026</span></li>
+<li class="latest-row"><a class="latest-title" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=JO1OQj8AAAAJ&citation_for_view=JO1OQj8AAAAJ:Y0pCki6q_DkC" target="_blank" rel="noopener">Spatially resolved airway niches: mapping epithelial–immune microenvironments in asthma</a><span class="latest-meta"><a class="latest-author" href="https://scholarlybrightminds.github.io/molhamsakkal/">Molham Sakkal</a> &middot; Expert Review of Respiratory Medicine 20 (3), 307-320, 2026</span></li>
+<li class="latest-row"><a class="latest-title" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=1I8SvsQAAAAJ&citation_for_view=1I8SvsQAAAAJ:eQOLeE2rZwMC" target="_blank" rel="noopener">Introducing AutoML framework for Drug–Drug Interaction Prediction: Application of AutoGluon</a><span class="latest-meta"><a class="latest-author" href="https://scholarlybrightminds.github.io/abdallahabouhajal/">Abdallah Abou Hajal</a> &middot; Toxicology Mechanisms and Methods, 1-11, 2026</span></li>
+<li class="latest-row"><a class="latest-title" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=uy-28F0AAAAJ&citation_for_view=uy-28F0AAAAJ:9yKSN-GCB0IC" target="_blank" rel="noopener">Evaluation of a student-led breast cancer awareness campaign as a co-curricular model in pharmacy education: a mixed-methods study in the UAE</a><span class="latest-meta"><a class="latest-author" href="https://scholarlybrightminds.github.io/Rahafalzeer/">Rahaf Al Zeer</a> &middot; BMC Medical Education, 2026</span></li></ul></section><!-- LATEST-END -->
 
 </main>
 
