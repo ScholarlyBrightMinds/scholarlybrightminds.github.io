@@ -97,17 +97,14 @@ def _format_int(n: int) -> str:
 
 
 def render_org_stats(members: list[dict[str, Any]]) -> str:
-    total_pubs   = sum(m["total_documents"] for m in members)
-    total_cites  = sum(m["total_citations"] for m in members)
-    max_h        = max((m["h_index"] for m in members), default=0)
-    return (
-        '<div class="org-stats" data-aggregated="true">'
-        f'<span class="org-stat"><strong>{len(members)}</strong> researchers</span>'
-        f'<span class="org-stat"><strong>{_format_int(total_pubs)}</strong> publications</span>'
-        f'<span class="org-stat"><strong>{_format_int(total_cites)}</strong> citations</span>'
-        f'<span class="org-stat"><strong>h-index {max_h}</strong> (top)</span>'
-        f'</div>'
-    )
+    """Org-stats strip removed at the user's request 2026-05-19. Summing
+    publication and citation counts across members produces inflated numbers
+    (co-authored papers are counted twice) and the "max h-index" pill
+    represents a single person rather than a team statistic. We keep the
+    function so the comment-marker block stays in place and can be repurposed
+    later (e.g. a non-inflated, dedup'd team count) without re-threading the
+    HTML patch logic — for now it just emits an empty marker."""
+    return ""
 
 
 def render_member_pill(member: dict[str, Any]) -> str:
