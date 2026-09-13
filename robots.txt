@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+# Google and Bing only read robots.txt at the host root, so every site
+# on this host is listed here, not in the /<slug>/robots.txt files.
 Sitemap: https://scholarlybrightminds.github.io/sitemap.xml
+Sitemap: https://scholarlybrightminds.github.io/abdallahabouhajal/sitemap.xml
+Sitemap: https://scholarlybrightminds.github.io/molhamsakkal/sitemap.xml
+Sitemap: https://scholarlybrightminds.github.io/Rahafalzeer/sitemap.xml
+Sitemap: https://scholarlybrightminds.github.io/ahmadalmeslamani/sitemap.xml
