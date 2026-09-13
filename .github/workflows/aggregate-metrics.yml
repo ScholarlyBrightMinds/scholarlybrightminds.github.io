@@ -1,8 +1,8 @@
 name: Weekly Hub Metrics Aggregation
 
 # Re-bakes the org-wide live stats strip, per-member metric pills, and the
-# combined "Latest work" feed into index.html. Runs every Monday at 06:00 UTC
-# — one hour after each member's serpapi-weekly.yml workflow finishes at
+# combined "Latest work" feed into index.html. Runs every Monday at 06:00 UTC,
+# one hour after each member's serpapi-weekly.yml workflow finishes at
 # 05:00 UTC, so member data is fresh when the hub pulls from it.
 
 on:
@@ -28,7 +28,7 @@ jobs:
           python-version: '3.12'
 
       - name: Aggregate live metrics from member sites
-        # No external API keys needed — every member repo is public and the
+        # No external API keys needed: every member repo is public and the
         # script pulls data/serpapi/{metrics,serpapi}.json straight from
         # raw.githubusercontent.com.
         run: |
@@ -40,3 +40,8 @@ jobs:
         with:
           commit_message: 'docs: refresh org-wide live metrics + latest feed'
           file_pattern: 'index.html'
+
+      - name: Tell IndexNow about every page on the host
+        # Bing, Yandex, Seznam and Naver. Google reads robots.txt instead.
+        continue-on-error: true
+        run: python indexnow_ping.py
