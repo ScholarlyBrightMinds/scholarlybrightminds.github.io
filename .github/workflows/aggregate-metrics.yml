@@ -41,7 +41,7 @@ jobs:
           commit_message: 'docs: refresh org-wide live metrics + latest feed'
           file_pattern: 'index.html'
 
-      - name: Tell IndexNow about every page on the host
+      - name: Tell IndexNow about the pages that changed this week
         # Bing, Yandex, Seznam and Naver. Google reads robots.txt instead.
         continue-on-error: true
         run: python indexnow_ping.py
